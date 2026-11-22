@@ -1,4 +1,4 @@
-let items = [
+const defaultTasks = [
 	"Сделать проектную работу",
 	"Полить цветы",
 	"Пройти туториал по Реакту",
@@ -6,6 +6,8 @@ let items = [
 	"Прогуляться по улице в солнечный день",
 	"Помыть посуду",
 ];
+
+let items = defaultTasks;
 
 const listElement = document.querySelector(".to-do__list");
 const formElement = document.querySelector(".to-do__form");
@@ -19,7 +21,7 @@ function loadTasks() {
 	if (savedTasks) {
 		return JSON.parse(savedTasks);
 	}
-	return items;
+	return defaultTasks;
 }
 
 function createItem(item) {
@@ -46,12 +48,12 @@ function createItem(item) {
 	});
 
 	editButton.addEventListener("click", function () {
-		textElement.setAttribute("contenteditable", "true");
+		textElement.contentEditable = true;
 		textElement.focus();
 	});
 
 	textElement.addEventListener("blur", function () {
-		textElement.setAttribute("contenteditable", "false");
+		textElement.contentEditable = false;
 		items = getTasksFromDOM();
 		saveTasks(items);
 	});
